@@ -24,9 +24,6 @@ node_modules
 # Test Coverage
 coverage
 
-# Build
-dist
-
 #Docs
 docs
 
