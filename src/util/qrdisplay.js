@@ -295,6 +295,7 @@ const uportLogoWithBg = `
 const uportQRInstructions = `
   color: #7C828B;
   font-family: Avenir;
+  padding: 0 10px;
   font-size: 18px;
   text-align: center;
   margin-top: 0;
