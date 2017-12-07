@@ -214,7 +214,7 @@ class ConnectCore {
    *  @param    {String}     [request.uriHandler=this.uriHandler]   function to consume URI, can be used to display QR codes or other custom UX
    *  @return   {Promise<Object, Error>}                            promise which resolves with a response object or rejects with an error.
    */
-  request ({uri, topic, uriHandler}) {
+  request ({uri, topic, uriHandler, explanation}) {
     const defaultUriHandler = !uriHandler
 
     if (defaultUriHandler) { uriHandler = this.uriHandler }
@@ -227,7 +227,7 @@ class ConnectCore {
     // TODO consider UI for push notifications, maybe a popup explaining, then a loading symbol waiting for a response, a retry and a cancel button. should dev use uriHandler if using push notifications?
     (this.isOnMobile && this.mobileUriHandler)
       ? this.mobileUriHandler(uri)
-      : uriHandler(uri, topic.cancel, this.appName, this.firstReq)
+      : uriHandler(uri, topic.cancel, this.appName, this.firstReq, explanation)
 
     this.firstReq = false
 
@@ -283,7 +283,7 @@ class ConnectCore {
   sendTransaction (txobj, uriHandler) {
     const topic = this.topicFactory('tx')
     let uri = paramsToUri(this.addAppParameters(txobj, topic.url))
-    return this.request({uri, topic, uriHandler})
+    return this.request({uri, topic, uriHandler, explanation: txobj.explanation})
   }
 
   /**

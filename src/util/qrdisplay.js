@@ -27,7 +27,7 @@ const getQRDataURI = (data) => {
  *  @param    {String}     appName    name of the users app
  *  @param    {Boolean}    introModal a flag for displaying the intro
  */
-const openQr = (data, cancel, appName, introModal) => {
+const openQr = (data, cancel, appName, introModal, explanation) => {
 
   let wrapper = document.createElement('div')
   wrapper.setAttribute('id', 'uport-wrapper')
@@ -35,7 +35,7 @@ const openQr = (data, cancel, appName, introModal) => {
   wrapper.innerHTML =
     introModal
       ? introModalDisplay(appName)
-      : uportQRDisplay({qrImageUri: getQRDataURI(data), cancel})
+      : uportQRDisplay({qrImageUri: getQRDataURI(data), cancel, explanation})
 
   const cancelClick = (event) => {
     document.getElementById('uport-qr-text').innerHTML = 'Cancelling';
@@ -113,10 +113,11 @@ const introModalDisplay = (appName) => {
  *  @param    {Object}     args
  *  @param    {String}     args.qrImageUri    a image URI for the QR code
  */
-const uportQRDisplay = ({qrImageUri}) => uportModal(`
+const uportQRDisplay = ({qrImageUri, explanation}) => uportModal(`
   <div>
     <div style="${uportLogoWithBg}">${SVG.logowithBG}</div>
     <p id="uport-qr-text" style="${uportQRInstructions}">Scan QR code with uPort Mobile App</p>
+    <p id="uport-qr-text" style="${uportQRInstructions}">${explanation}</p>
     <img src="${qrImageUri}" style="${uportQRIMG}" />
   </div>
 `)
