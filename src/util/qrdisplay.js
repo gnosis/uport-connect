@@ -112,6 +112,7 @@ const introModalDisplay = (appName) => {
  *
  *  @param    {Object}     args
  *  @param    {String}     args.qrImageUri    a image URI for the QR code
+ *  @param    {String}     args.explanation   small text explainning the transaction
  */
 const uportQRDisplay = ({qrImageUri, explanation = ''}) => uportModal(`
   <div>
